@@ -4,13 +4,14 @@ using System.Linq;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using TonyUtil.Helpers;
 
 namespace TonyUtil.Dependency
 {
     /// <summary>
-    /// TODO
+    /// Autofac对象容器
     /// </summary>
-   public class Container:IContainer
+    public class Container:IContainer
     {
         /// <summary>
         /// 容器
@@ -68,7 +69,9 @@ namespace TonyUtil.Dependency
         /// <returns></returns>
         public object Create(Type type, string name = null)
         {
-            throw new NotImplementedException();
+            return Web.HttpContext?.RequestServices != null
+                ? GetServiceFromHttpContext(type, name)
+                : GetService(type, name);
         }
 
         /// <summary>
@@ -77,9 +80,12 @@ namespace TonyUtil.Dependency
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        private object GetServiceFromHttpContext(Type type, string name)//TODO
+        private object GetServiceFromHttpContext(Type type, string name)
         {
-            var serviceProvider =
+            var serviceProvider = Web.HttpContext.RequestServices;
+            if (name == null) return serviceProvider.GetService(type);
+            var context = serviceProvider.GetService<IComponentContext>();
+            return context.ResolveNamed(name, type);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using TonyUtil.Dependency;
 
 namespace TonyUtil.Helpers
@@ -73,6 +74,41 @@ namespace TonyUtil.Helpers
             return (TResult) DefaultContainer.Create(type, name);
         }
 
+        /// <summary>
+        /// 作用域开始
+        /// </summary>
+        /// <returns></returns>
+        public static IScope BeginScope()
+        {
+            return DefaultContainer.BeginScope();
+        }
+
+        /// <summary>
+        /// 注册依赖
+        /// </summary>
+        /// <param name="configs">依赖配置</param>
+        public static void Register(params IConfig[] configs)
+        {
+            DefaultContainer.Register(null, builder => builder.EnableAop(), configs);
+        }
+
+        /// <summary>
+        /// 注册依赖
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        /// <param name="configs">依赖配置</param>
+        public static void Register(IServiceCollection services, params IConfig[] configs)
+        {
+            DefaultContainer.Register(services, builder => builder.EnableAop(), configs);
+        }
+
+        /// <summary>
+        /// 释放容器
+        /// </summary>
+        public static void Dispose()
+        {
+            DefaultContainer.Dispose();
+        }
 
     }
 }
