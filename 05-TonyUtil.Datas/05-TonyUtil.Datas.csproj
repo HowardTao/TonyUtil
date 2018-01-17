@@ -6,4 +6,16 @@
     <RootNamespace>TonyUtil.Datas</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\01-TonyUtil\01-TonyUtil.csproj" />
+    <ProjectReference Include="..\03-TonyUtil.Logs\03-TonyUtil.Logs.csproj" />
+  </ItemGroup>
+
 </Project>
