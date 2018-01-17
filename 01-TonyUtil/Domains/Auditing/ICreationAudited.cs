@@ -22,6 +22,6 @@ namespace TonyUtil.Domains.Auditing
         /// <summary>
         /// 创建人编号
         /// </summary>
-        TKey CreatorKey { get; set; }
+        TKey CreatorId { get; set; }
     }
 }
