@@ -237,7 +237,7 @@ namespace TonyUtil.Webs.Clients
         }
 
         /// <summary>
-        /// 获取结果  TODO
+        /// 获取结果 
         /// </summary>
         /// <returns></returns>
        public string Result()
@@ -246,7 +246,27 @@ namespace TonyUtil.Webs.Clients
             {
                 SendBefore();
                 var response = await SendAsync();
-            })
+                var result = await response.Content.ReadAsStringAsync();
+                SendAfter(result, response.StatusCode, GetContentType(response));
+                return result;
+            });
+        }
+
+        /// <summary>
+        /// 获取结果
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ResultAsync()
+        {
+           SendBefore();
+            var response = await SendAsync();
+            return await response.Content.ReadAsStringAsync().ContinueWith((task, state) =>
+            {
+                var result = task.Result;
+                SendAfter(result, response.StatusCode, state.SafeString());
+                return result;
+
+            }, GetContentType(response));
         }
 
         /// <summary>
@@ -264,9 +284,66 @@ namespace TonyUtil.Webs.Clients
             return await client.SendAsync(CreateRequestMessage());
         }
 
+        /// <summary>
+        /// 发送后操作
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="contentType"></param>
         protected virtual void SendAfter(string result, HttpStatusCode statusCode, string contentType)
         {
-            
+            if (IsSuccess(statusCode))
+            {
+                SuccessHandler(result,statusCode,contentType);
+            }
+            else
+            {
+                FailHandler(result,statusCode,contentType);
+            }
+        }
+
+        /// <summary>
+        /// 发送请求是否成功
+        /// </summary>
+        /// <param name="statusCode"></param>
+        /// <returns></returns>
+        protected virtual bool IsSuccess(HttpStatusCode statusCode)
+        {
+            return statusCode.Value() < 400;
+        }
+
+        /// <summary>
+        /// 成功处理操作
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="contentType"></param>
+        protected virtual void SuccessHandler(string result, HttpStatusCode statusCode,string contentType)
+        {            
+        }
+
+        /// <summary>
+        /// 失败处理操作
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="contentType"></param>
+        protected virtual void FailHandler(string result, HttpStatusCode statusCode, string contentType)
+        {
+            _failAction?.Invoke(result);
+            _failStatusCodeAction?.Invoke(result,statusCode);
+        }
+
+        /// <summary>
+        /// 获取内容类型
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        private string GetContentType(HttpResponseMessage response)
+        {
+            return response?.Content?.Headers?.ContentType == null
+                ? string.Empty
+                : response.Content.Headers.ContentType.MediaType;
         }
 
         /// <summary>
