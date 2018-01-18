@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TonyUtil.Datas.UnitOfWorks;
+using TonyUtil.Domains.Auditing;
 using TonyUtil.Domains.Sessions;
+using TonyUtil.Exceptions;
 
 namespace TonyUtil.Datas.Ef.Core
 {
     /// <summary>
-    /// 工作单元 TODO
+    /// 工作单元
     /// </summary>
    public abstract class UnitOfWorkBase:DbContext,IUnitOfWork
     {
@@ -40,25 +44,62 @@ namespace TonyUtil.Datas.Ef.Core
         #endregion
 
         #region OnConfiguring（配置）
+        /// <summary>
+        /// 配置
+        /// </summary>
+        /// <param name="optionsBuilder">配置生成器</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            EnableLog(optionsBuilder);
+        }
+
+        /// <summary>
+        /// 启用日志 
+        /// </summary>
+        /// <param name="builder"></param>
+        protected void EnableLog(DbContextOptionsBuilder builder)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
 
+        #region Commit（提交）
+        /// <summary>
+        /// 提交，返回影响的行数
+        /// </summary>
+        /// <returns></returns>
         public int Commit()
         {
             try
             {
-                throw new NotImplementedException();
+                return SaveChanges();
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                throw new concurren(ex);
+                throw new ConcurrencyExpection(ex);
             }
         }
+        #endregion
 
+        #region CommitAsync（异步提交）
+        /// <summary>
+        /// 异步提交，返回影响的行数
+        /// </summary>
+        /// <returns></returns>
         public async Task<int> CommitAsync()
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                return await SaveChangesAsync();
+            }
+            catch (DBConcurrencyException exception)
+            {
+                throw new ConcurrencyExpection(exception);
+            }
+        } 
+        #endregion
 
         #region OnModelCreating（配置映射）
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -102,5 +143,106 @@ namespace TonyUtil.Datas.Ef.Core
             return Helpers.Reflection.GetTypesByInterface<IMap>(assembly);
         }
         #endregion
+
+        #region SaveChanges（保存更改）
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()
+        {
+            SaveChangesBefore();
+            return base.SaveChanges();
+        }
+
+        /// <summary>
+        /// 保存更改前操作
+        /// </summary>
+        protected virtual void SaveChangesBefore()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                        case EntityState.Added:
+                        InterceptAddedOperation(entry);
+                        break;
+                        case EntityState.Modified:
+                        InterceptModifiedOperation(entry);
+                        break;
+                        case EntityState.Deleted:
+                        InterceptDeletedOperation(entry);
+                       break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 拦截添加操作
+        /// </summary>
+        /// <param name="entry"></param>
+        protected virtual void InterceptAddedOperation(EntityEntry entry)
+        {
+            InitCreationAudited(entry);
+            InitModificationAudited(entry);
+        }
+
+        /// <summary>
+        /// 初始化创建审计信息
+        /// </summary>
+        /// <param name="entry"></param>
+        private void InitCreationAudited(EntityEntry entry)
+        {
+            CreationAuditedInitializer.Init(entry,GetSession());
+        }
+
+        /// <summary>
+        /// 拦截修改操作
+        /// </summary>
+        /// <param name="entry"></param>
+        protected virtual void InterceptModifiedOperation(EntityEntry entry)
+        {
+            InitModificationAudited(entry);
+        }
+
+        /// <summary>
+        /// 初始化修改审计信息
+        /// </summary>
+        /// <param name="entry"></param>
+        private void InitModificationAudited(EntityEntry entry)
+        {
+            ModificationAuditedInitializer.Init(entry,GetSession());
+        }
+
+        /// <summary>
+        /// 获取用户会话
+        /// </summary>
+        /// <returns></returns>
+        protected virtual ISession GetSession()
+        {
+            return Session;
+        }
+
+        /// <summary>
+        /// 拦截删除操作
+        /// </summary>
+        /// <param name="entry"></param>
+        public virtual void InterceptDeletedOperation(EntityEntry entry) { }
+
+        #endregion
+
+        #region SaveChangesAsync（异步保存更改）
+        /// <summary>
+        /// 异步保存更改
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            SaveChangesBefore();
+            return base.SaveChangesAsync(cancellationToken);
+        }  
+        #endregion
+
     }
 }
