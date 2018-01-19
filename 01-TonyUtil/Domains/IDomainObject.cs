@@ -1,6 +1,11 @@
-﻿namespace TonyUtil.Domains
+﻿using TonyUtil.Validations;
+
+namespace TonyUtil.Domains
 {
-   public interface IDomainObject
+    /// <summary>
+    /// 领域对象
+    /// </summary>
+   public interface IDomainObject:IValidation
     {
     }
 }
