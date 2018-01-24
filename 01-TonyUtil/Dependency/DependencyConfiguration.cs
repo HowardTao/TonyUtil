@@ -5,13 +5,14 @@ using System.Reflection;
 using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using TonyUtil.Contexts;
+using TonyUtil.Events.Handlers;
 using TonyUtil.Helpers;
 using TonyUtil.Reflections;
 
 namespace TonyUtil.Dependency
 {
     /// <summary>
-    /// 依赖配置 TODO
+    /// 依赖配置
     /// </summary>
    public class DependencyConfiguration
     {
