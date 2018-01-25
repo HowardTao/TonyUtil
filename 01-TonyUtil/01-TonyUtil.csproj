@@ -35,11 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Datas\Queries\Internal\" />
-    <Folder Include="Datas\Queries\Trees\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Extensions.Lambda.cs" />
   </ItemGroup>
 
