@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using TonyUtil.Validations;
 
@@ -124,9 +128,130 @@ namespace TonyUtil.Domains
         #endregion
 
         #region GetChanges（获取变更属性）
-        public ChangeValueCollection GetChanges(T other)
+        /// <summary>
+        /// 获取变更属性
+        /// </summary>
+        /// <param name="newEntity">新对象</param>
+        /// <returns></returns>
+        public ChangeValueCollection GetChanges(T newEntity)
         {
-            throw new System.NotImplementedException();
+            _changeValues = new ChangeValueCollection();
+            if (Equals(newEntity, null)) return _changeValues;
+            AddChanges(newEntity);
+            return _changeValues;
+        }
+
+        /// <summary>
+        /// 添加变更列表
+        /// </summary>
+        /// <param name="newEntity">新对象</param>
+        protected virtual void AddChanges(T newEntity)
+        {
+            
+        }
+
+        /// <summary>
+        /// 添加变更
+        /// </summary>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="expression">属性表达式,范例：t => t.Name</param>
+        /// <param name="newValue">新值,范例：newEntity.Name</param>
+        protected void AddChange<TProperty, TValue>(Expression<Func<T, TProperty>> expression, TValue newValue)
+        {
+            var name = Helpers.Lambda.GetName(expression);
+            var description =
+                Helpers.Reflection.GetDisplayNameOrDescription((PropertyInfo) Helpers.Lambda.GetMember(expression));
+            var value = Helpers.Lambda.GetValue(expression);
+            AddChange(name,description,Helpers.Convert.To<TValue>(value),newValue);
+        }
+
+        /// <summary>
+        /// 添加变更
+        /// </summary>
+        /// <typeparam name="TValue">值类型</typeparam>
+        /// <param name="propertyName">属性名</param>
+        /// <param name="description">描述</param>
+        /// <param name="oldValue">旧值,范例：this.Name</param>
+        /// <param name="newValue">新值,范例：newEntity.Name</param>
+        protected void AddChange<TValue>(string propertyName, string description,TValue oldValue,TValue newValue)
+        {
+            if(Equals(oldValue,newValue)) return;
+            var oldValueString = oldValue.SafeString().ToLower().Trim();
+            var newValueString = newValue.SafeString().ToLower().Trim();
+            if(oldValueString==newValueString) return;
+            _changeValues.Add(propertyName,description,oldValueString,newValueString);
+        }
+
+        /// <summary>
+        /// 添加变更
+        /// </summary>
+        /// <typeparam name="TDomainObject">对象类型</typeparam>
+        /// <param name="oldObjects">旧对象列表</param>
+        /// <param name="newObjects">新对象列表</param>
+        protected void AddChange<TDomainObject>(IEnumerable<ICompareChange<TDomainObject>> oldObjects,
+            IEnumerable<TDomainObject> newObjects) where TDomainObject : IDomainObject
+        {
+            if (Equals(oldObjects, null)) return;
+            if (Equals(newObjects, null)) return;
+            var oldList = oldObjects.ToList();
+            var newList = newObjects.ToList();
+            for (var i = 0; i < oldList.Count; i++)
+            {
+                if(newList.Count<=i) return;
+                AddChange(oldList[i],newList[i]);
+            }
+        }
+
+        /// <summary>
+        /// 添加变更
+        /// </summary>
+        /// <typeparam name="TDomainObject">对象类型</typeparam>
+        /// <param name="oldObject">旧对象</param>
+        /// <param name="newObject">新对象</param>
+        protected void AddChange<TDomainObject>(ICompareChange<TDomainObject> oldObject, TDomainObject newObject)
+            where TDomainObject : IDomainObject
+        {
+            if (Equals(oldObject, null)) return;
+            if(Equals(newObject,null)) return;
+            _changeValues.AddRange(oldObject.GetChanges(newObject));
+        }
+        #endregion
+
+        #region AddDescriptions（添加描述）
+        /// <summary>
+        /// 添加描述
+        /// </summary>
+        protected virtual void AddDescriptions() { }
+
+        /// <summary>
+        /// 添加描述
+        /// </summary>
+        /// <param name="description">描述</param>
+        protected void AddDescription(string description)
+        {
+            if(string.IsNullOrWhiteSpace(description)) return;
+            _description.Append(description);
+        }
+
+        protected void AddDescription<TValue>(string name, TValue value)
+        {
+            if(value==null) return;
+            if(string.IsNullOrWhiteSpace(value.ToString())) return;
+            _description.AppendFormat("{0}:{1}", name, value);
+        }
+        #endregion
+
+        #region ToString（输出对象状态）
+        /// <summary>
+        /// 输出对象状态
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            _description = new StringBuilder();
+            AddDescriptions();
+            return _description.ToString().TrimEnd().TrimEnd(',');
         } 
         #endregion
     }

@@ -21,11 +21,11 @@ namespace TonyUtil.Domains.Trees
         /// <summary>
         /// 级数
         /// </summary>
-         int  Level { get; set; }
+         int  Level { get;}
         /// <summary>
         /// 路径
         /// </summary>
-         string  Path { get; set; }
+         string  Path { get;}
         /// <summary>
         /// 排序号
         /// </summary>

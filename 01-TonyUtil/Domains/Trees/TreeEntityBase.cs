@@ -54,12 +54,12 @@ namespace TonyUtil.Domains.Trees
         /// 路径
         /// </summary>
         [Required]
-        public virtual string Path { get; private set; }
+        public virtual string Path { get;private  set; }
 
         /// <summary>
         /// 级数
         /// </summary>
-        public int Level { get; private set; }
+        public int Level { get;private  set; }
 
         /// <summary>
         /// 启用
