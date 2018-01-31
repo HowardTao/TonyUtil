@@ -5,17 +5,17 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-TonyUtil", "01-TonyUtil\01-TonyUtil.csproj", "{4E3DDECA-5C52-4F87-9373-69DB27B7B2EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-TonyUtil.Security", "02-TonyUtil.Security\02-TonyUtil.Security.csproj", "{6C07901B-3C18-4940-86C1-7ECB41158269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-TonyUtil.Security", "02-TonyUtil.Security\02-TonyUtil.Security.csproj", "{6C07901B-3C18-4940-86C1-7ECB41158269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-TonyUtil.Logs", "03-TonyUtil.Logs\03-TonyUtil.Logs.csproj", "{510AC26F-3EB0-4C1A-B1C1-6D84E6779667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-TonyUtil.Logs", "03-TonyUtil.Logs\03-TonyUtil.Logs.csproj", "{510AC26F-3EB0-4C1A-B1C1-6D84E6779667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-TonyUtil.Events", "04-TonyUtil.Events\04-TonyUtil.Events.csproj", "{AE81BC4F-4796-4FC7-A101-A4EFEA40EF6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-TonyUtil.Events", "04-TonyUtil.Events\04-TonyUtil.Events.csproj", "{AE81BC4F-4796-4FC7-A101-A4EFEA40EF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05-TonyUtil.Datas", "05-TonyUtil.Datas\05-TonyUtil.Datas.csproj", "{DC6A9750-97D1-4A3D-A9F0-FFA75748D0A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05-TonyUtil.Datas", "05-TonyUtil.Datas\05-TonyUtil.Datas.csproj", "{DC6A9750-97D1-4A3D-A9F0-FFA75748D0A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06-TonyUtil.Applications", "06-TonyUtil.Applications\06-TonyUtil.Applications.csproj", "{7B8E5F74-CF80-4D10-A366-41EFB2B5F746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06-TonyUtil.Applications", "06-TonyUtil.Applications\06-TonyUtil.Applications.csproj", "{7B8E5F74-CF80-4D10-A366-41EFB2B5F746}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07-TonyUtil.Webs", "07-TonyUtil.Webs\07-TonyUtil.Webs.csproj", "{355CAF9C-B245-4626-9294-D15E4AEB15B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07-TonyUtil.Webs", "07-TonyUtil.Webs\07-TonyUtil.Webs.csproj", "{355CAF9C-B245-4626-9294-D15E4AEB15B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-src", "01-src", "{D7639AF9-F843-4981-BD2E-C12B93A8E299}"
 EndProject
@@ -27,19 +27,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Biz", "03-Biz", "{9AECD0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Tools", "04-Tools", "{130F70F3-50A4-4A08-951B-5C247050A1EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-TonyUtil.Ui.Abstractions", "01-TonyUtil.Ui.Abstractions\01-TonyUtil.Ui.Abstractions.csproj", "{BD466D4D-4E2E-415D-9E96-05FBC40A3E5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-TonyUtil.Ui.Abstractions", "01-TonyUtil.Ui.Abstractions\01-TonyUtil.Ui.Abstractions.csproj", "{BD466D4D-4E2E-415D-9E96-05FBC40A3E5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-TonyUtil.Ui.Core", "02-TonyUtil.Ui.Core\02-TonyUtil.Ui.Core.csproj", "{EC97A1DF-F882-40F2-B16F-566FAE675E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-TonyUtil.Ui.Core", "02-TonyUtil.Ui.Core\02-TonyUtil.Ui.Core.csproj", "{EC97A1DF-F882-40F2-B16F-566FAE675E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-TonyUtil.Ui.Angular", "03-TonyUtil.Ui.Angular\03-TonyUtil.Ui.Angular.csproj", "{53512764-48CB-49AF-8EC9-C06595C92E81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-TonyUtil.Ui.Angular", "03-TonyUtil.Ui.Angular\03-TonyUtil.Ui.Angular.csproj", "{53512764-48CB-49AF-8EC9-C06595C92E81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-TonyUtil.Biz", "01-TonyUtil.Biz\01-TonyUtil.Biz.csproj", "{9C7A9051-395E-4717-84D7-525CA955F30B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-TonyUtil.Biz", "01-TonyUtil.Biz\01-TonyUtil.Biz.csproj", "{9C7A9051-395E-4717-84D7-525CA955F30B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-TonyUtil.Biz.Payments", "02-TonyUtil.Biz.Payments\02-TonyUtil.Biz.Payments.csproj", "{2A8FD917-A976-408C-8BFC-25706E7B6FAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-TonyUtil.Biz.Payments", "02-TonyUtil.Biz.Payments\02-TonyUtil.Biz.Payments.csproj", "{2A8FD917-A976-408C-8BFC-25706E7B6FAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-TonyUtil.Tools.QrCode", "01-TonyUtil.Tools.QrCode\01-TonyUtil.Tools.QrCode.csproj", "{F0DB3684-8FD1-4638-B1F7-2F36AAE012A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-TonyUtil.Tools.QrCode", "01-TonyUtil.Tools.QrCode\01-TonyUtil.Tools.QrCode.csproj", "{F0DB3684-8FD1-4638-B1F7-2F36AAE012A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-TonyUtil.Tools.Sms", "02-TonyUtil.Tools.Sms\02-TonyUtil.Tools.Sms.csproj", "{846BA518-0813-4416-ABF8-0AAB6A7DB1DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-TonyUtil.Tools.Sms", "02-TonyUtil.Tools.Sms\02-TonyUtil.Tools.Sms.csproj", "{846BA518-0813-4416-ABF8-0AAB6A7DB1DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-test", "02-test", "{218A51C8-50BE-4091-89CA-18CBBCE1071B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Core", "01-Core", "{31B25143-2A0F-4C94-AD81-08D850047F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-TonyUtill.Datas.Tests.Integration", "02-TonyUtill.Datas.Tests.Integration\02-TonyUtill.Datas.Tests.Integration.csproj", "{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +109,10 @@ Global
 		{846BA518-0813-4416-ABF8-0AAB6A7DB1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{846BA518-0813-4416-ABF8-0AAB6A7DB1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{846BA518-0813-4416-ABF8-0AAB6A7DB1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +136,8 @@ Global
 		{2A8FD917-A976-408C-8BFC-25706E7B6FAD} = {9AECD071-7C85-4829-BB18-4C7B78D5E5D4}
 		{F0DB3684-8FD1-4638-B1F7-2F36AAE012A6} = {130F70F3-50A4-4A08-951B-5C247050A1EE}
 		{846BA518-0813-4416-ABF8-0AAB6A7DB1DE} = {130F70F3-50A4-4A08-951B-5C247050A1EE}
+		{31B25143-2A0F-4C94-AD81-08D850047F38} = {218A51C8-50BE-4091-89CA-18CBBCE1071B}
+		{8FE0FDF8-84A9-4919-A0A4-06ADD0B4A550} = {31B25143-2A0F-4C94-AD81-08D850047F38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3E9294E-7DEB-4B83-BD49-8FE0348EC970}
