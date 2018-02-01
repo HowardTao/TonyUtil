@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "target": "es5",
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
@@ -11,10 +11,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true, // Workaround for https://github.com/angular/angular/issues/17863. Remove this if you upgrade to a fixed version of Angular.
+    "skipLibCheck": true,
     "strict": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "webpack-env" ,"jasmine"]
+    "types": ["webpack-env","jasmine"]
   },
-  "exclude": [ "bin", "node_modules" ]
+  "exclude": [
+    "bin",
+    "node_modules"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "scripts": {
+    "vendor": "webpack --config webpack.config.vendor.js",
+    "app": "webpack --config webpack.config.util.js && webpack",
+    "dev": "npm run vendor && npm run app",
+    "prod": "webpack --config webpack.config.vendor.js --env.prod && webpack --config webpack.config.util.js --env.prod && webpack --env.prod"
+  },
+  "devDependencies": {
+  }
+}
