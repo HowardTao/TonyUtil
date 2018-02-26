@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>TonyUtil.Logs</RootNamespace>
-    <AssemblyName>TonyUtil.Logs</AssemblyName>
-  </PropertyGroup>
-
-</Project>

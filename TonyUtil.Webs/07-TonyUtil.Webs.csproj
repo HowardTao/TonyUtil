@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>TonyUtil.Webs</RootNamespace>
-    <AssemblyName>TonyUtil.Webs</AssemblyName>
-  </PropertyGroup>
-
-</Project>

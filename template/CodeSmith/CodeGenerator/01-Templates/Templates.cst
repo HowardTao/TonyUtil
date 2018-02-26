@@ -1,0 +1,3 @@
+﻿<%@ Template Language="C#" TargetLanguage="Text" Debug="True" OutputType="None" %>
+
+<%@ Assembly Name="SchemaExplorer" %>

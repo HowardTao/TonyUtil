@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78BF55A9-8BD6-42ED-8EFA-4B6A56E86BDD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeGenerator</RootNamespace>
+    <AssemblyName>CodeGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CodeSmith.Core">
+      <HintPath>Libraries\CodeSmith.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSmith.Engine">
+      <HintPath>Libraries\CodeSmith.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>Libraries\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Libraries\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp">
+      <HintPath>Libraries\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Libraries\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="SchemaExplorer">
+      <HintPath>Libraries\SchemaExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="01-Templates\Common\Extensions.cs" />
+    <Compile Include="01-Templates\Common\Generator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="01-Templates\Templates.cst" />
+    <None Include="Project.csp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="01-Templates\Templates\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
