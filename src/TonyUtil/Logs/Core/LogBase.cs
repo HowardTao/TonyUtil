@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using TonyUtil.Domains.Sessions;
 using TonyUtil.Logs.Abstractions;
+using TonyUtil.Logs.Extensions;
 
 namespace TonyUtil.Logs.Core
 {
@@ -54,71 +56,186 @@ namespace TonyUtil.Logs.Core
         /// <returns></returns>
         protected abstract TContent GetContent();
 
-        public ILog Set<TContent1>(Action<TContent1> action) where TContent1 : ILogContent
+        /// <summary>
+        /// 设置内容
+        /// </summary>
+        /// <param name="action">设置内容操作</param>
+        /// <returns></returns>
+        public ILog Set<T>(Action<T> action) where T : ILogContent
         {
-            throw new NotImplementedException();
+            if(action==null) throw new ArgumentNullException(nameof(action));
+            ILogContent content = LogContent;
+            action((T)content);
+            return this;
         }
 
-        public bool IsDebugEnabled { get; }
-        public bool IsTraceEnabled { get; }
-        public void Trace()
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="content">日志内容</param>
+        protected virtual void Init(TContent content)
         {
-            throw new NotImplementedException();
+            content.LogName = Provider.LogName;
+            content.TraceId = Content.TraceId;
+            content.OperationTime = DateTime.Now.ToMillisecondString();
+            content.Ip = Content.Ip;
+            content.Host = Content.Host;
+            content.ThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId.ToString();
+            content.Browser = Content.Browser;
+            content.Url = Content.Url;
+            content.UserId = Session.UserId;
         }
 
-        public void Trace(string message)
+        /// <summary>
+        /// 调式级别是否启用
+        /// </summary>
+        public bool IsDebugEnabled => Provider.IsDebugEnabled;
+
+        /// <summary>
+        /// 跟踪级别是否启用
+        /// </summary>
+        public bool IsTraceEnabled => Provider.IsTraceEnabled;
+
+        /// <summary>
+        /// 跟踪
+        /// </summary>
+        public virtual void Trace()
         {
-            throw new NotImplementedException();
+            _content = LogContent;
+            Execute(LogLevel.Trace, ref _content);
         }
 
-        public void Debug()
+        /// <summary>
+        /// 跟踪
+        /// </summary>
+        /// <param name="message"></param>
+        public virtual void Trace(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Trace();
         }
 
+        /// <summary>
+        /// 执行
+        /// </summary>
+        private void Execute(LogLevel level, ref TContent content)
+        {
+            if(content==null) return;
+            if(Enabled(level)==false) return;
+            try
+            {
+                content.Level = Helpers.Enum.GetName<LogLevel>(level);
+                Init(content);
+                Provider.WriteLog(level,content);
+            }
+            finally
+            {
+                content = null;
+            }
+        }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        private bool Enabled(LogLevel level)
+        {
+            if (level > LogLevel.Debug) return true;
+            return IsDebugEnabled || IsTraceEnabled && level == LogLevel.Trace;
+        }
+
+        /// <summary>
+        /// 调试
+        /// </summary>
+        public virtual void Debug()
+        {
+            _content = LogContent;
+            Execute(LogLevel.Debug, ref _content);
+        }
+
+        /// <summary>
+        /// 调试
+        /// </summary>
+        /// <param name="message">日志消息</param>
         public void Debug(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Debug();
         }
 
+        /// <summary>
+        /// 信息
+        /// </summary>
         public void Info()
         {
-            throw new NotImplementedException();
+            _content = LogContent;
+            Execute(LogLevel.Information, ref _content);
         }
 
+        /// <summary>
+        /// 信息
+        /// </summary>
+        /// <param name="message">日志消息</param>
         public void Info(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Info();
         }
 
+        /// <summary>
+        /// 警告
+        /// </summary>
         public void Warn()
         {
-            throw new NotImplementedException();
+            _content = LogContent;
+            Execute(LogLevel.Warning, ref _content);
         }
 
+        /// <summary>
+        /// 警告
+        /// </summary>
+        /// <param name="message">日志消息</param>
         public void Warn(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Warn();
         }
 
+        /// <summary>
+        /// 错误
+        /// </summary>
         public void Error()
         {
-            throw new NotImplementedException();
+            _content = LogContent;
+            Execute(LogLevel.Error, ref _content);
         }
 
+        /// <summary>
+        /// 错误
+        /// </summary>
+        /// <param name="message">日志消息</param>
         public void Error(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Error();
         }
 
+        /// <summary>
+        /// 致命错误
+        /// </summary>
         public void Fatal()
         {
-            throw new NotImplementedException();
+            _content = LogContent;
+            Execute(LogLevel.Critical, ref _content);
         }
 
+        /// <summary>
+        /// 致命错误
+        /// </summary>
+        /// <param name="message">日志消息</param>
         public void Fatal(string message)
         {
-            throw new NotImplementedException();
+            LogContent.Content(message);
+            Fatal();
         }
     }
 }
