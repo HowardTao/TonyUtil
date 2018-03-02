@@ -6,4 +6,8 @@
     <AssemblyName>TonyUtil.Logs</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+  </ItemGroup>
+
 </Project>
