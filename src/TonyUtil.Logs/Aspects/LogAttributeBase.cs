@@ -1,10 +1,21 @@
-﻿using AspectCore.DynamicProxy;
+﻿using System.Threading.Tasks;
+using AspectCore.DynamicProxy;
+using AspectCore.DynamicProxy.Parameters;
 using TonyUtil.Aspects.Base;
+using TonyUtil.Logs.Extensions;
 
 namespace TonyUtil.Logs.Aspects
 {
+    /// <summary>
+    /// 日志操作
+    /// </summary>
    public abstract class LogAttributeBase: InterceptorBase
     {
+        public override Task Invoke(AspectContext context, AspectDelegate next)
+        {
+            var methodName = GetMethodName(context);
+            //var log = lOG
+        }
 
         /// <summary>
         /// 是否启用
@@ -32,14 +43,29 @@ namespace TonyUtil.Logs.Aspects
             return $"{context.ServiceMethod.DeclaringType.FullName}.{context.ServiceMethod.Name}";
         }
 
+        /// <summary>
+        /// 执行前
+        /// </summary>
         private void ExecuteBefore(ILog log, AspectContext context, string methodName)
         {
-            
+            log.Caption($"{context.ServiceMethod.Name}方法执行前")
+                .Class(context.ServiceMethod.DeclaringType.FullName)
+                .Method(methodName);
+            foreach (var parameter in context.GetParameters())
+                parameter.AppendTo(log);
+            WriteLog(log);
         }
 
+        /// <summary>
+        /// 执行后
+        /// </summary>
         private void ExecuteAfter(ILog log, AspectContext context, string methodName)
         {
-            
+            var parameter = context.GetReturnParameter();
+            log.Caption($"{context.ServiceMethod.Name}方法执行后")
+                .Method(methodName)
+                .Content($"返回类型: {parameter.ParameterInfo.ParameterType.FullName},返回值: {parameter.Value.SafeString()}");
+            WriteLog(log);
         }
 
     }
