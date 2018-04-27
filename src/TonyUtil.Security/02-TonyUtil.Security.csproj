@@ -6,4 +6,8 @@
     <RootNamespace>TonyUtil.Security</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+  </ItemGroup>
+
 </Project>
