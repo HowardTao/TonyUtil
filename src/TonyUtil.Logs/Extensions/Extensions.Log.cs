@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TonyUtil.Exceptions;
-using TonyUtil.Logs.Abstractions;
 using TonyUtil.Logs.Contents;
-using TonyUtil.Logs.Core;
 
 namespace TonyUtil.Logs.Extensions
 {

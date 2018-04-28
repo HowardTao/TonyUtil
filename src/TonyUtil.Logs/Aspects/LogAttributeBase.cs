@@ -11,10 +11,20 @@ namespace TonyUtil.Logs.Aspects
     /// </summary>
    public abstract class LogAttributeBase: InterceptorBase
     {
-        public override Task Invoke(AspectContext context, AspectDelegate next)
+        /// <summary>
+        /// 执行
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="next"></param>
+        /// <returns></returns>
+        public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
             var methodName = GetMethodName(context);
-            //var log = lOG
+            var log = Log.GetLog(methodName);
+            if (!Enabled(log)) return;
+            ExecuteBefore(log,context,methodName);
+            await next(context);
+            ExecuteAfter(log,context,methodName);
         }
 
         /// <summary>

@@ -117,7 +117,7 @@ namespace TonyUtil.Datas.Queries
         /// 注意：一次仅能添加一个条件，范例：t => t.Name == "a" &amp;&amp; t.Mobile == "123"，不支持，将抛出异常</param>
         public IQuery<TEntity, TKey> WhereIfNotEmpty(Expression<Func<TEntity, bool>> predicate)
         {
-            predicate = Helper.GetWhereInfNotEmptyExpression(predicate);
+            predicate = Helper.GetWhereIfNotEmptyExpression(predicate);
             return predicate == null ? this : And(predicate);
         }
 
@@ -231,7 +231,7 @@ namespace TonyUtil.Datas.Queries
             if (predicates == null) return this;
             foreach (var item in predicates)
             {
-                var predicate = Helper.GetWhereInfNotEmptyExpression(item);
+                var predicate = Helper.GetWhereIfNotEmptyExpression(item);
                 if(predicate==null) continue;
                 _predicate = _predicate.Or(predicate);
             }

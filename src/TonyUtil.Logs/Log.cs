@@ -1,5 +1,4 @@
-﻿using System;
-using TonyUtil.Domains.Sessions;
+﻿using TonyUtil.Domains.Sessions;
 using TonyUtil.Helpers;
 using TonyUtil.Logs.Abstractions;
 using TonyUtil.Logs.Contents;
@@ -22,19 +21,19 @@ namespace TonyUtil.Logs
         /// 初始化日志操作
         /// </summary>
         /// <param name="providerFactory">日志提供程序工厂</param>
-        /// <param name="content">日志上下文</param>
+        /// <param name="context">日志上下文</param>
         /// <param name="format">日志格式器</param>
         /// <param name="session">用户会话</param>
-        public Log(ILogProviderFactory providerFactory,ILogContent content,ILogFormat format,ISession session) : base(providerFactory.Create("", format), content, session) { }
+        public Log(ILogProviderFactory providerFactory,ILogContext context,ILogFormat format,ISession session) : base(providerFactory.Create("", format), context, session) { }
 
         /// <summary>
         /// 初始化日志操作
         /// </summary>
         /// <param name="provider">日志提供程序</param>
-        /// <param name="content">日志上下文</param>
+        /// <param name="context">日志上下文</param>
         /// <param name="session">用户会话</param>
         /// <param name="class">类名</param>
-        public Log(ILogProvider provider, ILogContent content, ISession session,string @class) : base(provider, content, session)
+        public Log(ILogProvider provider, ILogContext context, ISession session,string @class) : base(provider, context, session)
         {
             _class = @class;
         }
@@ -102,9 +101,11 @@ namespace TonyUtil.Logs
         public static ILog GetLog(string logName, string @class)
         {
             var providerFactory = GetLogProviderFactory();
-            var format = getlog
+            var format = GetLogFormat();
+            var context = GetLogContext();
+            var session = GetSession();
+            return new Log(providerFactory.Create(logName,format),context,session,@class);
         }
-
 
         private static ILogProviderFactory GetLogProviderFactory()
         {
@@ -112,12 +113,16 @@ namespace TonyUtil.Logs
             {
                 return Ioc.Create<ILogProviderFactory>();
             }
-            catch 
+            catch
             {
-                //return new nlog
+                return new NLog.LogProviderFactory();
             }
         }
 
+        /// <summary>
+        /// 获取日志格式器
+        /// </summary>
+        /// <returns></returns>
         private static ILogFormat GetLogFormat()
         {
             try
@@ -126,8 +131,46 @@ namespace TonyUtil.Logs
             }
             catch
             {
-
+                return Formats.ContentFormat.Instance;
             }
         }
+
+        /// <summary>
+        /// 获取日志上下文
+        /// </summary>
+        /// <returns></returns>
+        private static ILogContext GetLogContext()
+        {
+            try
+            {
+                return Ioc.Create<ILogContext>();
+            }
+            catch
+            {
+                return NullLogContext.Instance;
+            }
+        }
+
+        /// <summary>
+        /// 获取用户会话
+        /// </summary>
+        /// <returns></returns>
+        private static ISession GetSession()
+        {
+            try
+            {
+                return Ioc.Create<ISession>();
+            }
+            catch
+            {
+                return Domains.Sessions.Session.Null;
+            }
+        }
+
+        /// <summary>
+        /// 空日志操作
+        /// </summary>
+        public static readonly ILog Null = NullLog.Instance;
+
     }
 }

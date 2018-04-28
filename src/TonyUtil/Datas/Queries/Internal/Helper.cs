@@ -8,7 +8,7 @@ namespace TonyUtil.Datas.Queries.Internal
     /// <summary>
     /// 查询工具类
     /// </summary>
-   internal static class Helper
+   public static class Helper
     {
         /// <summary>
         /// 获取查询条件表达式

@@ -26,12 +26,12 @@ namespace TonyUtil.Logs.Core
         /// 
         /// </summary>
         /// <param name="provider">日志提供程序</param>
-        /// <param name="content">日志上下文</param>
+        /// <param name="context">日志上下文</param>
         /// <param name="session">用户会话</param>
-        protected LogBase(ILogProvider provider, ILogContent content, ISession session)
+        protected LogBase(ILogProvider provider, ILogContext context, ISession session)
         {
             Provider = provider;
-            Content = content;
+            Context = context;
             Session = session ?? Domains.Sessions.Session.Null;
         }
 
@@ -43,7 +43,7 @@ namespace TonyUtil.Logs.Core
         /// <summary>
         /// 日志上下文
         /// </summary>
-        public ILogContent Content { get; }
+        public ILogContext Context { get; }
 
         /// <summary>
         /// 用户会话
@@ -76,13 +76,13 @@ namespace TonyUtil.Logs.Core
         protected virtual void Init(TContent content)
         {
             content.LogName = Provider.LogName;
-            content.TraceId = Content.TraceId;
+            content.TraceId = Context.TraceId;
             content.OperationTime = DateTime.Now.ToMillisecondString();
-            content.Ip = Content.Ip;
-            content.Host = Content.Host;
+            content.Ip = Context.Ip;
+            content.Host = Context.Host;
             content.ThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId.ToString();
-            content.Browser = Content.Browser;
-            content.Url = Content.Url;
+            content.Browser = Context.Browser;
+            content.Url = Context.Url;
             content.UserId = Session.UserId;
         }
 

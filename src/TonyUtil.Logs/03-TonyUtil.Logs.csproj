@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\Extensions.Exception.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Extensions\Extensions.Exception.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Exceptionless" Version="4.2.1989" />
+    <PackageReference Include="NLog" Version="4.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TonyUtil.Security\02-TonyUtil.Security.csproj" />
     <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
   </ItemGroup>
@@ -24,10 +37,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Formats\" />
   </ItemGroup>
 
 </Project>

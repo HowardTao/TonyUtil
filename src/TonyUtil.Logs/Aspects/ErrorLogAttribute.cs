@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using AspectCore.DynamicProxy;
+using AspectCore.DynamicProxy.Parameters;
 using TonyUtil.Aspects.Base;
+using TonyUtil.Logs.Extensions;
 
 namespace TonyUtil.Logs.Aspects
 {
@@ -9,10 +11,23 @@ namespace TonyUtil.Logs.Aspects
     /// </summary>
    public class ErrorLogAttribute : InterceptorBase
     {
-        public override Task Invoke(AspectContext context, AspectDelegate next)
+        public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
             var methodName = GetMethodName(context);
-            var log = Log.GetLog
+            var log = Log.GetLog(methodName);
+            try
+            {
+                await next(context);
+            }
+            catch (System.Exception ex)
+            {
+                log.Class(context.ServiceMethod.DeclaringType.FullName).Method(methodName).Exception(ex);
+                foreach (var parameter in context.GetParameters())
+                {
+                    parameter.AppendTo(log);
+                }
+                throw;
+            }
         }
 
         /// <summary>
