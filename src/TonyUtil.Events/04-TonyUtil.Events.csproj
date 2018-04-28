@@ -6,4 +6,9 @@
     <AssemblyName>TonyUtil.Events</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil.Logs\03-TonyUtil.Logs.csproj" />
+    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+  </ItemGroup>
+
 </Project>
