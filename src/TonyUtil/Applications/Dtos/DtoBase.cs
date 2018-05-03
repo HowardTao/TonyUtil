@@ -1,0 +1,17 @@
+﻿using System.Runtime.Serialization;
+
+namespace TonyUtil.Applications.Dtos
+{
+    /// <summary>
+    /// 数据传输对象
+    /// </summary>
+    [DataContract]
+   public abstract  class DtoBase:RequestBase,IDto
+    {
+        /// <summary>
+        /// 标识码
+        /// </summary>
+        [DataMember]
+        public string Id { get; set; }
+    }
+}

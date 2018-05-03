@@ -6,4 +6,11 @@
     <AssemblyName>TonyUtil.Applications</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil.Datas\05-TonyUtil.Datas.csproj" />
+    <ProjectReference Include="..\TonyUtil.Logs\03-TonyUtil.Logs.csproj" />
+    <ProjectReference Include="..\TonyUtil.Security\02-TonyUtil.Security.csproj" />
+    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+  </ItemGroup>
+
 </Project>

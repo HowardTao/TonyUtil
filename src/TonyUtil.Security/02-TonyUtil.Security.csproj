@@ -10,4 +10,8 @@
     <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Identity\" />
+  </ItemGroup>
+
 </Project>
