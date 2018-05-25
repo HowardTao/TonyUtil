@@ -17,6 +17,13 @@ namespace TonyUtil.Webs.Commons
         /// 数据
         /// </summary>
        private readonly dynamic _data;
+
+        /// <summary>
+        /// 初始化返回结果
+        /// </summary>
+        /// <param name="code">状态码</param>
+        /// <param name="message">消息</param>
+        /// <param name="data">数据</param>
         public Result(StateCode code,string message,dynamic data=null) : base(null)
         {
             _code = code;
@@ -24,6 +31,11 @@ namespace TonyUtil.Webs.Commons
             _data = data;
         }
 
+        /// <summary>
+        /// 执行结果
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
        public override Task ExecuteResultAsync(ActionContext context)
        {
            Value = new

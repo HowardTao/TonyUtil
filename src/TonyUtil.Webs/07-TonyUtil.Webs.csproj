@@ -13,7 +13,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil.Applications\06-TonyUtil.Applications.csproj" />
+    <ProjectReference Include="..\TonyUtil.Logs\03-TonyUtil.Logs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="WebResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WebResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="WebResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

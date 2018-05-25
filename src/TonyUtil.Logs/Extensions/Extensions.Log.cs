@@ -127,5 +127,20 @@ namespace TonyUtil.Logs.Extensions
                 content.Exception = exception;
             });
         }
+
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="exception">异常</param>
+        /// <param name="log">日志</param>
+        public static void Log(this Exception exception, ILog log)
+        {
+            if (!(exception is Warning warning))
+            {
+                log.Exception(exception).Error();
+                return;
+            }
+            log.Exception(exception,warning.Code).Warn();
+        }
     }
 }
