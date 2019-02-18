@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TonyUtil.Datas.Queries
-{
+namespace TonyUtil.Datas.Queries {
     /// <summary>
     /// 排序生成器
     /// </summary>
-   public class OrderByBuilder
-    {
+    public class OrderByBuilder {
         /// <summary>
         /// 排序项列表
         /// </summary>
@@ -16,8 +14,7 @@ namespace TonyUtil.Datas.Queries
         /// <summary>
         /// 初始化排序生成器
         /// </summary>
-        public OrderByBuilder()
-        {
+        public OrderByBuilder() {
             _items = new List<OrderByItem>();
         }
 
@@ -26,19 +23,17 @@ namespace TonyUtil.Datas.Queries
         /// </summary>
         /// <param name="name">排序属性</param>
         /// <param name="desc">是否降序</param>
-        public void Add(string name, bool desc = false)
-        {
-            if(string.IsNullOrWhiteSpace(name)) return;
-            _items.Add(new OrderByItem(name,desc));
+        public void Add( string name, bool desc = false ) {
+            if( string.IsNullOrWhiteSpace( name ) )
+                return;
+            _items.Add( new OrderByItem( name, desc ) );
         }
 
         /// <summary>
         /// 生成排序字符串
         /// </summary>
-        /// <returns></returns>
-        public string Generate()
-        {
-            return _items.Select(t => t.Generate()).ToList().Join();
+        public string Generate() {
+            return _items.Select( t => t.Generate() ).ToList().Join();
         }
     }
 }

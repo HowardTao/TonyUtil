@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace TonyUtil.Logs.Abstractions
-{
+namespace TonyUtil.Logs.Abstractions {
     /// <summary>
     /// 日志提供程序
     /// </summary>
-    public interface ILogProvider
-    {
+    public interface ILogProvider {
         /// <summary>
         /// 日志名称
         /// </summary>
@@ -24,6 +22,6 @@ namespace TonyUtil.Logs.Abstractions
         /// </summary>
         /// <param name="level">日志等级</param>
         /// <param name="content">日志内容</param>
-        void WriteLog(LogLevel level, ILogContent content);
+        void WriteLog( LogLevel level, ILogContent content );
     }
 }

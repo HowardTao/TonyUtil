@@ -1,13 +1,11 @@
 ﻿using System.Text;
 using TonyUtil.Exceptions;
 
-namespace TonyUtil.Logs.Abstractions
-{
+namespace TonyUtil.Logs.Abstractions {
     /// <summary>
     /// 日志内容
     /// </summary>
-    public interface ILogContent
-    {
+    public interface ILogContent {
         /// <summary>
         /// 日志名称
         /// </summary>

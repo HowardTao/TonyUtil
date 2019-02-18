@@ -1,11 +1,9 @@
 ﻿using TonyUtil.Validations;
 
-namespace TonyUtil.Domains
-{
+namespace TonyUtil.Domains {
     /// <summary>
     /// 领域对象
     /// </summary>
-   public interface IDomainObject:IValidation
-    {
+    public interface IDomainObject : IValidation {
     }
 }

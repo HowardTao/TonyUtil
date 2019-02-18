@@ -9,9 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace TonyUtil.Properties {
-    using System;
-    
-    
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
@@ -39,7 +36,7 @@ namespace TonyUtil.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TonyUtil.Properties.R", typeof(R).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Util.Properties.R", typeof(R).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

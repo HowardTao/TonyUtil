@@ -1,10 +1,8 @@
-﻿namespace TonyUtil.Datas.Queries
-{
+﻿namespace TonyUtil.Datas.Queries {
     /// <summary>
     /// 查询边界
     /// </summary>
-    public enum Boundary
-    {
+    public enum Boundary {
         /// <summary>
         /// 包含左边
         /// </summary>

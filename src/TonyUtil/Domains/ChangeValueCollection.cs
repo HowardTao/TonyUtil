@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace TonyUtil.Domains
-{
+namespace TonyUtil.Domains {
     /// <summary>
     /// 变更值集合
     /// </summary>
-   public class ChangeValueCollection:List<ChangeValue>
-    {
+    public class ChangeValueCollection : List<ChangeValue> {
         /// <summary>
         /// 添加
         /// </summary>
@@ -15,24 +13,20 @@ namespace TonyUtil.Domains
         /// <param name="description">描述</param>
         /// <param name="oldValue">旧值</param>
         /// <param name="newValue">新值</param>
-        public void Add(string propertyName, string description, string oldValue, string newValue)
-        {
-            if(string.IsNullOrWhiteSpace(propertyName)) return;
-            Add(new ChangeValue(propertyName, description, oldValue, newValue));
+        public void Add( string propertyName, string description, string oldValue, string newValue ) {
+            if( string.IsNullOrWhiteSpace( propertyName ) )
+                return;
+            Add( new ChangeValue( propertyName, description, oldValue, newValue ) );
         }
 
         /// <summary>
         /// 输出变更信息
         /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
+        public override string ToString() {
             var result = new StringBuilder();
-            foreach (var item in this)
-            {
-                result.AppendLine(item.ToString());
-            }
-          return result.ToString();
+            foreach( var item in this )
+                result.AppendLine( item.ToString() );
+            return result.ToString();
         }
     }
 }

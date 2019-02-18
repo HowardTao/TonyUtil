@@ -20,7 +20,7 @@ namespace TonyUtil.Ui.Configs
         /// <summary>
         /// 内容
         /// </summary>
-        IHtmlContent Content { get; set; }
+        TagHelperContent Content { get; set; }
         /// <summary>
         /// 属性集合是否包含指定属性
         /// </summary>
@@ -31,6 +31,12 @@ namespace TonyUtil.Ui.Configs
         /// </summary>
         /// <param name="name">属性名</param>
         string GetValue(string name);
+        /// <summary>
+        /// 获取属性值，无值则返回Null
+        /// </summary>
+        /// <param name="name">属性名</param>
+        /// <returns></returns>
+        string GetValueOrNull(string name);
         /// <summary>
         /// 获取属性值
         /// </summary>

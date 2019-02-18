@@ -6,9 +6,8 @@ using TonyUtil.Datas.Queries;
 using TonyUtil.Expressions;
 using TonyUtil.Helpers;
 
-namespace TonyUtil
-{
-   /// <summary>
+namespace TonyUtil {
+    /// <summary>
     /// 系统扩展 - Lambda表达式
     /// </summary>
     public static partial class Extensions {

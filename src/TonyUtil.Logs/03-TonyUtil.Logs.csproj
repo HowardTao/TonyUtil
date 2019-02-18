@@ -7,16 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Extensions\Extensions.Exception.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Extensions\Extensions.Exception.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Exceptionless" Version="4.2.1989" />
-    <PackageReference Include="NLog" Version="4.5.3" />
+    <PackageReference Include="Exceptionless" Version="4.3.2004" />
+    <PackageReference Include="NLog" Version="4.5.7" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TonyUtil.Datas\05-TonyUtil.Datas.csproj" />
     <ProjectReference Include="..\TonyUtil.Logs\03-TonyUtil.Logs.csproj" />
     <ProjectReference Include="..\TonyUtil.Security\02-TonyUtil.Security.csproj" />

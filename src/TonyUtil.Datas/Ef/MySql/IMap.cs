@@ -1,9 +1,7 @@
-﻿namespace TonyUtil.Datas.Ef.MySql
-{
+﻿namespace TonyUtil.Datas.Ef.MySql {
     /// <summary>
     /// 映射
     /// </summary>
-    public interface IMap:Core.IMap
-    {
+    public interface IMap : Core.IMap {
     }
 }

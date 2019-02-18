@@ -1,17 +1,15 @@
-﻿namespace TonyUtil.Events.Messages
-{
+﻿namespace TonyUtil.Events.Messages {
     /// <summary>
     /// 消息事件
     /// </summary>
-   public interface IMessageEvent:IEvent
-    {
+    public interface IMessageEvent : IEvent {
         /// <summary>
         /// 事件数据
         /// </summary>
         object Data { get; set; }
 
         /// <summary>
-        /// 发送目前
+        /// 发送目标
         /// </summary>
         string Target { get; set; }
 

@@ -9,9 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace TonyUtil.Webs {
-    using System;
-    
-    
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
@@ -22,7 +19,7 @@ namespace TonyUtil.Webs {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class WebResource {
+    public class WebResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +33,10 @@ namespace TonyUtil.Webs {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TonyUtil.Webs.WebResource", typeof(WebResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Util.Webs.WebResource", typeof(WebResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +48,7 @@ namespace TonyUtil.Webs {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +60,7 @@ namespace TonyUtil.Webs {
         /// <summary>
         ///   查找类似 创建参数不能为空 的本地化字符串。
         /// </summary>
-        internal static string CreateRequestIsEmpty {
+        public static string CreateRequestIsEmpty {
             get {
                 return ResourceManager.GetString("CreateRequestIsEmpty", resourceCulture);
             }
@@ -72,7 +69,7 @@ namespace TonyUtil.Webs {
         /// <summary>
         ///   查找类似 Id不能为空 的本地化字符串。
         /// </summary>
-        internal static string IdIsEmpty {
+        public static string IdIsEmpty {
             get {
                 return ResourceManager.GetString("IdIsEmpty", resourceCulture);
             }
@@ -81,7 +78,7 @@ namespace TonyUtil.Webs {
         /// <summary>
         ///   查找类似 修改参数不能为空 的本地化字符串。
         /// </summary>
-        internal static string UpdateRequestIsEmpty {
+        public static string UpdateRequestIsEmpty {
             get {
                 return ResourceManager.GetString("UpdateRequestIsEmpty", resourceCulture);
             }

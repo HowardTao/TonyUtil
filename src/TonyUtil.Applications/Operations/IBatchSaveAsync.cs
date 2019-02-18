@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using TonyUtil.Applications.Dtos;
 
-namespace TonyUtil.Applications.Operations
-{
+namespace TonyUtil.Applications.Operations {
     /// <summary>
     /// 批量保存操作
     /// </summary>
@@ -11,14 +10,13 @@ namespace TonyUtil.Applications.Operations
     /// <typeparam name="TRequest">参数类型</typeparam>
     public interface IBatchSaveAsync<TDto, TRequest>
         where TDto : IResponse, new()
-        where TRequest : IRequest, IKey, new()
-    {
+        where TRequest : IRequest, IKey, new() {
         /// <summary>
         /// 批量保存
         /// </summary>
         /// <param name="addList">新增列表</param>
         /// <param name="updateList">修改列表</param>
         /// <param name="deleteList">删除列表</param>
-        Task<List<TDto>> SaveAsync(List<TRequest> addList, List<TRequest> updateList, List<TRequest> deleteList);
+        Task<List<TDto>> SaveAsync( List<TRequest> addList, List<TRequest> updateList, List<TRequest> deleteList );
     }
 }

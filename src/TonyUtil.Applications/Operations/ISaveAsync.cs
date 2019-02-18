@@ -3,20 +3,17 @@ using TonyUtil.Applications.Aspects;
 using TonyUtil.Applications.Dtos;
 using TonyUtil.Validations.Aspects;
 
-namespace TonyUtil.Applications.Operations
-{
+namespace TonyUtil.Applications.Operations {
     /// <summary>
-    /// 更新操作
+    /// 保存操作
     /// </summary>
-    /// <typeparam name="TRequest">修改参数类型</typeparam>
-    public interface ISaveAsync<in TRequest> where TRequest:IRequest,new()
-    {
+    /// <typeparam name="TRequest">参数类型</typeparam>
+    public interface ISaveAsync<in TRequest> where TRequest : IRequest, IKey, new() {
         /// <summary>
-        /// 更新
+        /// 保存
         /// </summary>
-        /// <param name="request">修改参数</param>
-        /// <returns></returns>
+        /// <param name="request">参数</param>
         [UnitOfWork]
-        Task SaveAsync([Valid] TRequest request);
+        Task SaveAsync( [Valid] TRequest request );
     }
 }

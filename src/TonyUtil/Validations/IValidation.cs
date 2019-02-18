@@ -1,14 +1,11 @@
-﻿namespace TonyUtil.Validations
-{
+﻿namespace TonyUtil.Validations {
     /// <summary>
     /// 验证操作
     /// </summary>
-   public interface IValidation
-    {
+    public interface IValidation {
         /// <summary>
         /// 验证
         /// </summary>
-        /// <returns></returns>
         ValidationResultCollection Validate();
     }
 }

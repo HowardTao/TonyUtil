@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using TonyUtil.Datas.Ef.Configs;
 using TonyUtil.Datas.Ef.Core;
+using TonyUtil.Datas.Ef.SqlServer;
 using TonyUtil.Datas.UnitOfWorks;
 
-namespace TonyUtil.Datas.Ef
-{
+namespace TonyUtil.Datas.Ef {
     /// <summary>
     /// 服务扩展
     /// </summary>
-   public static partial class Extensions
-    {
+    public static partial class Extensions {
         /// <summary>
         /// 注册工作单元服务
         /// </summary>
@@ -19,13 +19,11 @@ namespace TonyUtil.Datas.Ef
         /// <typeparam name="TImplementation">工作单元实现类型</typeparam>
         /// <param name="services">服务集合</param>
         /// <param name="configAction">配置操作</param>
-        public static IServiceCollection AddUnitOfWork<TService, TImplementation>(this IServiceCollection services,
-            Action<DbContextOptionsBuilder> configAction)
-            where TService:class ,IUnitOfWork
-            where TImplementation:UnitOfWorkBase,TService
-        {
-            services.AddDbContext<TImplementation>(configAction);
-            services.AddScoped<TService, TImplementation>();
+        public static IServiceCollection AddUnitOfWork<TService, TImplementation>( this IServiceCollection services, Action<DbContextOptionsBuilder> configAction )
+            where TService : class, IUnitOfWork
+            where TImplementation : UnitOfWorkBase, TService {
+            services.AddDbContext<TImplementation>( configAction );
+            services.TryAddScoped<TService, TImplementation>();
             return services;
         }
 
@@ -37,41 +35,30 @@ namespace TonyUtil.Datas.Ef
         /// <param name="services">服务集合</param>
         /// <param name="connection">连接字符串</param>
         /// <param name="level">Ef日志级别</param>
-        public static IServiceCollection AddUnitOfWork<TService, TImplementation>(this IServiceCollection services,
-            string connection, EfLogLevel level = EfLogLevel.Sql)
+        public static IServiceCollection AddUnitOfWork<TService, TImplementation>( this IServiceCollection services, string connection,EfLogLevel level = EfLogLevel.Sql )
             where TService : class, IUnitOfWork
-            where TImplementation : UnitOfWorkBase, TService
-        {
+            where TImplementation : UnitOfWorkBase, TService {
             EfConfig.LogLevel = level;
-            return AddUnitOfWork<TService, TImplementation>(services, builder =>
-            {
-                ConfigConnection<TImplementation>(builder, connection);
-            });
+            return AddUnitOfWork<TService, TImplementation>( services, builder => {
+                ConfigConnection<TImplementation>( builder, connection );
+            } );
         }
 
         /// <summary>
         /// 配置连接字符串
         /// </summary>
-        /// <typeparam name="TImplementation"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="connection"></param>
-        private static void ConfigConnection<TImplementation>(DbContextOptionsBuilder builder, string connection)
-            where TImplementation : UnitOfWorkBase
-        {
-            var type = typeof(TImplementation).BaseType;
-            if (type == typeof(SqlServer.UnitOfWork))
-            {
-                builder.UseSqlServer(connection);
+        private static void ConfigConnection<TImplementation>( DbContextOptionsBuilder builder, string connection ) where TImplementation : UnitOfWorkBase {
+            var type = typeof( TImplementation ).BaseType;
+            if( type == typeof( UnitOfWork ) ) {
+                builder.UseSqlServer( connection );
                 return;
             }
-            if (type == typeof(MySql.UnitOfWork))
-            {
-                builder.UseMySql(connection);
+            if( type == typeof( MySql.UnitOfWork ) ) {
+                builder.UseMySql( connection );
                 return;
             }
-            if (type == typeof(PgSql.UnitOfWork))
-            {
-                builder.UseNpgsql(connection);
+            if( type == typeof( PgSql.UnitOfWork ) ) {
+                builder.UseNpgsql( connection );
                 return;
             }
         }

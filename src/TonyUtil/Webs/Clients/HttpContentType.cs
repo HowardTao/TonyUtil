@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace TonyUtil.Webs.Clients
-{
+namespace TonyUtil.Webs.Clients {
     /// <summary>
     /// 内容类型
     /// </summary>
-    public enum HttpContentType
-    {
+    public enum HttpContentType {
         /// <summary>
         /// application/x-www-form-urlencoded
         /// </summary>
-        [Description("application/x-www-form-urlencoded")]
+        [Description( "application/x-www-form-urlencoded" )]
         FormUrlEncoded,
         /// <summary>
         /// application/json
         /// </summary>
-        [Description("application/json")]
+        [Description( "application/json" )]
         Json
     }
 }

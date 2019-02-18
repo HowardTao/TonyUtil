@@ -4,43 +4,38 @@ using AspectCore.DynamicProxy.Parameters;
 using TonyUtil.Aspects.Base;
 using TonyUtil.Helpers;
 
-namespace TonyUtil.Validations.Aspects
-{
+namespace TonyUtil.Validations.Aspects {
     /// <summary>
     /// 验证拦截器
     /// </summary>
-    public class ValidAttribute : ParameterInterceptorBase
-    {
+    public class ValidAttribute : ParameterInterceptorBase {
         /// <summary>
         /// 执行
         /// </summary>
-        public override async Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next)
-        {
-            Validate(context.Parameter);
-            await next(context);
+        public override async Task Invoke( ParameterAspectContext context, ParameterAspectDelegate next ) {
+            Validate( context.Parameter );
+            await next( context );
         }
 
         /// <summary>
         /// 验证
         /// </summary>
-        private void Validate(Parameter parameter)
-        {
-            if (Reflection.IsGenericCollection(parameter.RawType))
-            {
-                ValidateCollection(parameter);
+        private void Validate( Parameter parameter ) {
+            if ( Reflection.IsGenericCollection( parameter.RawType ) ) {
+                ValidateCollection( parameter );
                 return;
             }
-            var validation = parameter.Value as IValidation;
+            IValidation validation = parameter.Value as IValidation;
             validation?.Validate();
         }
 
         /// <summary>
         /// 验证集合
         /// </summary>
-        private void ValidateCollection(Parameter parameter)
-        {
-            if (!(parameter.Value is IEnumerable<IValidation> validations))  return;
-            foreach (var validation in validations)
+        private void ValidateCollection( Parameter parameter ) {
+            if ( !( parameter.Value is IEnumerable<IValidation> validations ) )
+                return;
+            foreach ( var validation in validations )
                 validation.Validate();
         }
     }

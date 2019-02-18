@@ -1,12 +1,10 @@
 ﻿using System.Diagnostics;
 
-namespace TonyUtil.Logs.Abstractions
-{
+namespace TonyUtil.Logs.Abstractions {
     /// <summary>
     /// 日志上下文
     /// </summary>
-    public interface ILogContext
-    {
+    public interface ILogContext {
         /// <summary>
         /// 跟踪号
         /// </summary>

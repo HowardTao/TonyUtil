@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
 using TonyUtil.Applications.Dtos;
 
-namespace TonyUtil.Applications.Operations
-{
+namespace TonyUtil.Applications.Operations {
     /// <summary>
     /// 获取指定标识实体
     /// </summary>
-    public interface IGetById<TDto> where TDto : IResponse, new()
-    {
+    public interface IGetById<TDto> where TDto : IResponse, new() {
         /// <summary>
         /// 通过编号获取
         /// </summary>
         /// <param name="id">实体编号</param>
-        TDto GetById(object id);
+        TDto GetById( object id );
         /// <summary>
         /// 通过编号列表获取
         /// </summary>
         /// <param name="ids">用逗号分隔的Id列表，范例："1,2"</param>
-        List<TDto> GetByIds(string ids);
+        List<TDto> GetByIds( string ids );
     }
 }

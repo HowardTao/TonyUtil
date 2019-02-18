@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Text;
+using TonyUtil.Helpers;
 
-namespace TonyUtil.Events
-{
+namespace TonyUtil.Events {
     /// <summary>
     /// 事件
     /// </summary>
-   public class Event:IEvent
-    {
+    public class Event : IEvent {
         /// <summary>
         /// 初始化事件
         /// </summary>
-        public Event()
-        {
+        public Event() {
             Id = Guid.NewGuid().ToString();
             Time = DateTime.Now;
         }
@@ -30,13 +28,11 @@ namespace TonyUtil.Events
         /// <summary>
         /// 输出日志
         /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            var result = new StringBuilder();
-            result.AppendLine($"事件标识：{Id}");
-            result.AppendLine($"事件时间：{Time.ToMillisecondString()}");
-            result.Append($"事件数据：{Helpers.Json.ToJson(this)}");
+        public override string ToString() {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine( $"事件标识: {Id}" );
+            result.AppendLine( $"事件时间: {Time.ToMillisecondString()}" );
+            result.Append( $"事件数据：{Json.ToJson( this )}" );
             return result.ToString();
         }
     }

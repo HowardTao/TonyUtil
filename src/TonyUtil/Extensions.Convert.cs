@@ -1,183 +1,149 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Convert = TonyUtil.Helpers.Convert;
 
-namespace TonyUtil
-{
+namespace TonyUtil {
     /// <summary>
     /// 系统扩展 - 类型转换
     /// </summary>
-   public static partial class Extensions
-    {
+    public static partial class Extensions {
         /// <summary>
-        /// 安全转换给字符串,去除两端空格,当值为null时返回""
+        /// 安全转换为字符串，去除两端空格，当值为null时返回""
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public static string SafeString(this object input)
-        {
+        /// <param name="input">输入值</param>
+        public static string SafeString( this object input ) {
             return input == null ? string.Empty : input.ToString().Trim();
         }
 
         /// <summary>
-        /// 转换为32位整型
+        /// 转换为bool
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static int ToInt(this object input)
-        {
-            return Helpers.Convert.ToInt(input);
+        /// <param name="obj">数据</param>
+        public static bool ToBool( this string obj ) {
+            return Convert.ToBool( obj );
         }
 
         /// <summary>
-        /// 转换为32位可空整型
+        /// 转换为可空bool
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static int? ToIntOrNull(this object input)
-        {
-            return Helpers.Convert.ToIntOrNull(input);
+        /// <param name="obj">数据</param>
+        public static bool? ToBoolOrNull( this string obj ) {
+            return Convert.ToBoolOrNull( obj );
         }
 
         /// <summary>
-        /// 转换为64位整型
+        /// 转换为int
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static long ToLong(this object input)
-        {
-            return Helpers.Convert.ToLong(input);
+        /// <param name="obj">数据</param>
+        public static int ToInt( this string obj ) {
+            return Convert.ToInt( obj );
         }
 
         /// <summary>
-        /// 转换为64位可空整型
+        /// 转换为可空int
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static long? ToLongOrNull(this object input)
-        {
-            return Helpers.Convert.ToLongOrNull(input);
+        /// <param name="obj">数据</param>
+        public static int? ToIntOrNull( this string obj ) {
+            return Convert.ToIntOrNull( obj );
         }
 
         /// <summary>
-        /// 转换为64位浮点型
+        /// 转换为long
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static double ToDouble( this object input)
-        {
-            return Helpers.Convert.ToDouble(input);
+        /// <param name="obj">数据</param>
+        public static long ToLong( this string obj ) {
+            return Convert.ToLong( obj );
         }
 
         /// <summary>
-        /// 转换为64位可空浮点型
+        /// 转换为可空long
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static double? ToDoubleOrNull(this object input)
-        {
-            return Helpers.Convert.ToDoubleOrNull(input);
+        /// <param name="obj">数据</param>
+        public static long? ToLongOrNull( this string obj ) {
+            return Convert.ToLongOrNull( obj );
         }
 
         /// <summary>
-        /// 转换为128位浮点型
+        /// 转换为double
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static decimal ToDecimal(this object input)
-        {
-            return Helpers.Convert.ToDecimal(input);
+        /// <param name="obj">数据</param>
+        public static double ToDouble( this string obj ) {
+            return Convert.ToDouble( obj );
         }
 
         /// <summary>
-        /// 转换为128位可空浮点型
+        /// 转换为可空double
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static decimal? ToDecimalOrNull(this object input)
-        {
-            return Helpers.Convert.ToDecimalOrNull(input);
+        /// <param name="obj">数据</param>
+        public static double? ToDoubleOrNull( this string obj ) {
+            return Convert.ToDoubleOrNull( obj );
         }
 
         /// <summary>
-        /// 转换为布尔值
+        /// 转换为decimal
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static bool ToBool(this object input)
-        {
-            return Helpers.Convert.ToBool(input);
+        /// <param name="obj">数据</param>
+        public static decimal ToDecimal( this string obj ) {
+            return Convert.ToDecimal( obj );
         }
 
         /// <summary>
-        /// 转换为可空布尔值
+        /// 转换为可空decimal
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static bool? ToBoolOrNull(this object input)
-        {
-            return Helpers.Convert.ToBoolOrNull(input);
+        /// <param name="obj">数据</param>
+        public static decimal? ToDecimalOrNull( this string obj ) {
+            return Convert.ToDecimalOrNull( obj );
         }
 
         /// <summary>
         /// 转换为日期
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static DateTime ToDate(this object input)
-        {
-            return Helpers.Convert.ToDate(input);
+        /// <param name="obj">数据</param>
+        public static DateTime ToDate( this string obj ) {
+            return Convert.ToDate( obj );
         }
 
         /// <summary>
         /// 转换为可空日期
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static DateTime? ToDateOrNull(this object input)
-        {
-            return Helpers.Convert.ToDateOrNull(input);
+        /// <param name="obj">数据</param>
+        public static DateTime? ToDateOrNull( this string obj ) {
+            return Convert.ToDateOrNull( obj );
         }
 
         /// <summary>
         /// 转换为Guid
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static Guid ToGuid(this object input)
-        {
-            return Helpers.Convert.ToGuid(input);
+        /// <param name="obj">数据</param>
+        public static Guid ToGuid( this string obj ) {
+            return Convert.ToGuid( obj );
         }
 
         /// <summary>
         /// 转换为可空Guid
         /// </summary>
-        /// <param name="input">输入值</param>
-        /// <returns></returns>
-        public static Guid? ToGuidOrNull(this object input)
-        {
-            return Helpers.Convert.ToGuidOrNull(input);
+        /// <param name="obj">数据</param>
+        public static Guid? ToGuidOrNull( this string obj ) {
+            return Convert.ToGuidOrNull( obj );
         }
 
         /// <summary>
         /// 转换为Guid集合
         /// </summary>
-        /// <param name="input">以逗号分隔的元素集合字符串，范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A</param>
-        /// <returns></returns>
-        public static List<Guid> ToGuidList(this string input)
-        {
-            return Helpers.Convert.ToGuidList(input);
+        /// <param name="obj">数据,范例: "83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A"</param>
+        public static List<Guid> ToGuidList( this string obj ) {
+            return Convert.ToGuidList( obj );
         }
 
         /// <summary>
         /// 转换为Guid集合
         /// </summary>
-        /// <param name="input">字符串集合</param>
-        /// <returns></returns>
-        public static List<Guid> ToGuidList(this IList<string> input)
-        {
-            if (input == null) return new List<Guid>();
-            return input.Select(t => t.ToGuid()).ToList();
+        /// <param name="obj">字符串集合</param>
+        public static List<Guid> ToGuidList( this IList<string> obj ) {
+            if( obj == null )
+                return new List<Guid>();
+            return obj.Select( t => t.ToGuid() ).ToList();
         }
     }
 }

@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Identity\" />
+    <ProjectReference Include="..\TonyUtil\01-TonyUtil.csproj" />
   </ItemGroup>
 
 </Project>

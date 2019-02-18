@@ -1,13 +1,11 @@
-﻿namespace TonyUtil.Domains.Tenants
-{
+﻿namespace TonyUtil.Domains.Tenants {
     /// <summary>
     /// 租户
     /// </summary>
-   public interface ITenant
-    {
+    public interface ITenant {
         /// <summary>
         /// 租户编号
         /// </summary>
-         string TenantId { get; set; }
+        string TenantId { get; set; }
     }
 }

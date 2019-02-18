@@ -1,11 +1,9 @@
-﻿namespace TonyUtil.Domains
-{
+﻿namespace TonyUtil.Domains {
     /// <summary>
     /// 标识
     /// </summary>
     /// <typeparam name="TKey">标识类型</typeparam>
-   public interface IKey<out TKey>
-    {
+    public interface IKey<out TKey> {
         /// <summary>
         /// 标识
         /// </summary>

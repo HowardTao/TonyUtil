@@ -1,10 +1,8 @@
-﻿namespace TonyUtil.Applications.Aspects
-{
+﻿namespace TonyUtil.Applications.Aspects {
     /// <summary>
     /// 提交工作单元后操作
     /// </summary>
-   public interface ICommitAfter
-    {
+    public interface ICommitAfter {
         /// <summary>
         /// 提交后操作
         /// </summary>

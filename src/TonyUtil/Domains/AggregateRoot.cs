@@ -1,21 +1,18 @@
 ﻿using System;
 
-namespace TonyUtil.Domains
-{
+namespace TonyUtil.Domains {
     /// <summary>
     /// 聚合根
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">标识类型</typeparam>
-    public abstract class AggregateRoot<TEntity, TKey> : EntityBase<TEntity, TKey>, IAggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot
-    {
+    public abstract class AggregateRoot<TEntity, TKey> : EntityBase<TEntity, TKey>, IAggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot {
         /// <summary>
         /// 初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
-        protected AggregateRoot(TKey id)
-            : base(id)
-        {
+        protected AggregateRoot( TKey id )
+            : base( id ) {
         }
 
         /// <summary>
@@ -28,15 +25,15 @@ namespace TonyUtil.Domains
     /// 聚合根
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    public abstract class AggregateRoot<TEntity> : AggregateRoot<TEntity, Guid> where TEntity : IAggregateRoot
-    {
+    public abstract class AggregateRoot<TEntity> : AggregateRoot<TEntity, Guid> where TEntity : IAggregateRoot {
         /// <summary>
         /// 初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
-        protected AggregateRoot(Guid id)
-            : base(id)
-        {
+        protected AggregateRoot( Guid id )
+            : base( id ) {
         }
     }
 }
+
+

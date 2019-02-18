@@ -1,12 +1,10 @@
 ﻿using System.Diagnostics;
 
-namespace TonyUtil.Logs.Internal
-{
+namespace TonyUtil.Logs.Internal {
     /// <summary>
     /// 日志上下文信息
     /// </summary>
-    public class LogContextInfo
-    {
+    public class LogContextInfo {
         /// <summary>
         /// 跟踪号
         /// </summary>

@@ -9,9 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace TonyUtil.Properties {
-    using System;
-    
-    
     /// <summary>
     ///   一个强类型的资源类，用于查找本地化的字符串等。
     /// </summary>
@@ -39,7 +36,7 @@ namespace TonyUtil.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TonyUtil.Properties.LibraryResource", typeof(LibraryResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Util.Properties.LibraryResource", typeof(LibraryResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +63,15 @@ namespace TonyUtil.Properties {
         public static string ConcurrencyExceptionMessage {
             get {
                 return ResourceManager.GetString("ConcurrencyExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不允许将节点移动到自己或子节点下 的本地化字符串。
+        /// </summary>
+        public static string NotSupportMoveToChildren {
+            get {
+                return ResourceManager.GetString("NotSupportMoveToChildren", resourceCulture);
             }
         }
         

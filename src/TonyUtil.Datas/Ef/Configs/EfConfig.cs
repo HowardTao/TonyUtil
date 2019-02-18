@@ -1,12 +1,10 @@
-﻿namespace TonyUtil.Datas.Ef.Configs
-{
+﻿namespace TonyUtil.Datas.Ef.Configs {
     /// <summary>
-    /// EF配置
+    /// Ef配置
     /// </summary>
-   public class EfConfig
-    {
+    public class EfConfig {
         /// <summary>
-        /// EF日志级别
+        /// Ef日志级别
         /// </summary>
         public static EfLogLevel LogLevel = EfLogLevel.Sql;
     }

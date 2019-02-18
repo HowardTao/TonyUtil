@@ -2,13 +2,20 @@
 using TonyUtil.Exceptions;
 using TonyUtil.Logs.Abstractions;
 
-namespace TonyUtil.Logs.Contents
-{
+namespace TonyUtil.Logs.Contents {
     /// <summary>
     /// 日志内容
     /// </summary>
-   public class LogContent:ILogContent,ICaption
-    {
+    public class LogContent : ILogContent, ICaption {
+        /// <summary>
+        /// 初始化日志内容
+        /// </summary>
+        public LogContent() {
+            Params = new StringBuilder();
+            Content = new StringBuilder();
+            Sql = new StringBuilder();
+            SqlParams = new StringBuilder();
+        }
 
         /// <summary>
         /// 日志名称
@@ -51,25 +58,9 @@ namespace TonyUtil.Logs.Contents
         /// </summary>
         public string Url { get; set; }
         /// <summary>
-        /// 操作人编号
-        /// </summary>
-        public string UserId { get; set; }
-        /// <summary>
-        /// 内容
-        /// </summary>
-        public StringBuilder Content { get; set; }
-        /// <summary>
-        /// 异常
-        /// </summary>
-        public Warning Exception { get; set; }
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string Caption { get; set; }
-        /// <summary>
         /// 业务编号
         /// </summary>
-        public string  BusinessId { get; set; }
+        public string BusinessId { get; set; }
         /// <summary>
         /// 租户
         /// </summary>
@@ -95,13 +86,25 @@ namespace TonyUtil.Logs.Contents
         /// </summary>
         public StringBuilder Params { get; set; }
         /// <summary>
+        /// 操作人编号
+        /// </summary>
+        public string UserId { get; set; }
+        /// <summary>
         /// 操作人
         /// </summary>
         public string Operator { get; set; }
         /// <summary>
         /// 操作人角色
         /// </summary>
-        public string  Role { get; set; }
+        public string Role { get; set; }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Caption { get; set; }
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public StringBuilder Content { get; set; }
         /// <summary>
         /// Sql语句
         /// </summary>
@@ -114,5 +117,9 @@ namespace TonyUtil.Logs.Contents
         /// 错误码
         /// </summary>
         public string ErrorCode { get; set; }
+        /// <summary>
+        /// 异常
+        /// </summary>
+        public Warning Exception { get; set; }
     }
 }

@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace TonyUtil.Events
-{
+namespace TonyUtil.Events {
     /// <summary>
     /// 事件
     /// </summary>
-    public interface IEvent
-    {
+    public interface IEvent {
         /// <summary>
         /// 事件标识
         /// </summary>
-         string  Id { get; set; }
+        string Id { get; set; }
 
         /// <summary>
         /// 事件时间

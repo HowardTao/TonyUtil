@@ -1,11 +1,9 @@
 ﻿using Autofac.Core;
 
-namespace TonyUtil.Dependency
-{
+namespace TonyUtil.Dependency {
     /// <summary>
     /// 依赖配置
     /// </summary>
-   public interface IConfig:IModule
-    {
+    public interface IConfig : IModule {
     }
 }

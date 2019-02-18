@@ -1,19 +1,18 @@
 ﻿using System.Text;
+using TonyUtil.Helpers;
 
-namespace TonyUtil.Events.Messages
-{
+namespace TonyUtil.Events.Messages {
     /// <summary>
     /// 消息事件
     /// </summary>
-    public class MessageEvent:Event,IMessageEvent
-    {
+    public class MessageEvent : Event, IMessageEvent {
         /// <summary>
         /// 事件数据
         /// </summary>
         public object Data { get; set; }
 
         /// <summary>
-        /// 发送目前
+        /// 发送目标
         /// </summary>
         public string Target { get; set; }
 
@@ -25,14 +24,15 @@ namespace TonyUtil.Events.Messages
         /// <summary>
         /// 输出日志
         /// </summary>
-        public override string ToString()
-        {
-            var result = new StringBuilder();
-            result.AppendLine($"事件标识: {Id}");
-            result.AppendLine($"事件时间:{Time.ToMillisecondString()}");
-            if (string.IsNullOrWhiteSpace(Target) == false) result.AppendLine($"发送目标:{Target}");
-            if (string.IsNullOrWhiteSpace(Callback) == false) result.AppendLine($"回调:{Callback}");
-            result.Append($"事件数据：{Helpers.Json.ToJson(Data)}");
+        public override string ToString() {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine( $"事件标识: {Id}" );
+            result.AppendLine( $"事件时间:{Time.ToMillisecondString()}" );
+            if( string.IsNullOrWhiteSpace( Target ) == false )
+                result.AppendLine( $"发送目标:{Target}" );
+            if( string.IsNullOrWhiteSpace( Callback ) == false )
+                result.AppendLine( $"回调:{Callback}" );
+            result.Append( $"事件数据：{Json.ToJson( Data )}" );
             return result.ToString();
         }
     }

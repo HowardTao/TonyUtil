@@ -1,7 +1,8 @@
-﻿namespace TonyUtil.Datas.Ef.Configs
-{
-    public enum EfLogLevel
-    {
+﻿namespace TonyUtil.Datas.Ef.Configs {
+    /// <summary>
+    /// Ef日志级别
+    /// </summary>
+    public enum EfLogLevel {
         /// <summary>
         /// 输出全部日志，包括连接数据库，提交事务等大量信息
         /// </summary>

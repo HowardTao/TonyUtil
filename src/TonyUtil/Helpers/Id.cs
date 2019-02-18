@@ -1,45 +1,49 @@
-﻿namespace TonyUtil.Helpers
-{
+﻿using System;
+
+namespace TonyUtil.Helpers {
     /// <summary>
-    /// Id生成器
+    /// 标识生成器
     /// </summary>
-   public static  class Id
-    {
+    public static class Id {
         /// <summary>
-        /// Id
+        /// 标识
         /// </summary>
         private static string _id;
 
         /// <summary>
-        /// 设置Id
+        /// 设置标识
         /// </summary>
-        /// <param name="id"></param>
-        public static void SetId(string id)
-        {
+        /// <param name="id">Id</param>
+        public static void SetId( string id ) {
             _id = id;
         }
 
         /// <summary>
-        /// 重置Id
+        /// 重置标识
         /// </summary>
-        public static void Reset()
-        {
+        public static void Reset() {
             _id = null;
         }
 
         /// <summary>
-        /// 用Guid创建Id,去掉分隔符
+        /// 创建标识
         /// </summary>
-        /// <returns></returns>
-        public static string Guid()
-        {
-            return string.IsNullOrWhiteSpace(_id) ? System.Guid.NewGuid().ToString("N") : _id;
+        public static string ObjectId() {
+            return string.IsNullOrWhiteSpace( _id ) ? Internal.ObjectId.GenerateNewStringId() : _id;
         }
 
-        public static string ObjectId()
-        {
-            return string.IsNullOrWhiteSpace(_id) ? TonyUtil.Helpers.Internal.ObjectId.GenerateNewStringId() : _id;
+        /// <summary>
+        /// 用Guid创建标识,去掉分隔符
+        /// </summary>
+        public static string Guid() {
+            return string.IsNullOrWhiteSpace( _id ) ? System.Guid.NewGuid().ToString( "N" ) : _id;
+        }
+
+        /// <summary>
+        /// 获取Guid
+        /// </summary>
+        public static Guid GetGuid() {
+            return string.IsNullOrWhiteSpace( _id ) ? System.Guid.NewGuid() : _id.ToGuid();
         }
     }
-
 }

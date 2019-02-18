@@ -2,8 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>TonyUtil.Ui.Angular</RootNamespace>
+    <RootNamespace>TonyUtil.Ui</RootNamespace>
     <AssemblyName>TonyUtil.Ui.Angular</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TonyUtil.Ui.Core\02-TonyUtil.Ui.Core.csproj" />
+    <ProjectReference Include="..\TonyUtil.Webs\07-TonyUtil.Webs.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -4,13 +4,11 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TonyUtil.Dependency;
 
-namespace TonyUtil.Helpers
-{
+namespace TonyUtil.Helpers {
     /// <summary>
     /// 容器
     /// </summary>
-   public static class Ioc
-    {
+    public static class Ioc {
         /// <summary>
         /// 默认容器
         /// </summary>
@@ -20,23 +18,19 @@ namespace TonyUtil.Helpers
         /// 创建容器
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        /// <returns></returns>
-        public static IContainer CreateContainer(params IConfig[] configs)
-        {
+        public static IContainer CreateContainer( params IConfig[] configs ) {
             var container = new Container();
-            container.Register(null, builder => builder.EnableAop(), configs);
+            container.Register( null, builder => builder.EnableAop(), configs );
             return container;
         }
 
         /// <summary>
         /// 创建集合
         /// </summary>
-        /// <typeparam name="T">实例类型</typeparam>
+        /// <typeparam name="T">对象类型</typeparam>
         /// <param name="name">服务名称</param>
-        /// <returns></returns>
-        public static List<T> CreateList<T>(string name = null)
-        {
-            return DefaultContainer.CreateList<T>(name);
+        public static List<T> CreateList<T>( string name = null ) {
+            return DefaultContainer.CreateList<T>( name );
         }
 
         /// <summary>
@@ -45,10 +39,8 @@ namespace TonyUtil.Helpers
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        /// <returns></returns>
-        public static List<TResult> CreateList<TResult>(Type type, string name = null)
-        {
-            return ((IEnumerable<TResult>)DefaultContainer.CreateList(type, name)).ToList();
+        public static List<TResult> CreateList<TResult>( Type type, string name = null ) {
+            return ( (IEnumerable<TResult>)DefaultContainer.CreateList( type, name ) ).ToList();
         }
 
         /// <summary>
@@ -56,10 +48,8 @@ namespace TonyUtil.Helpers
         /// </summary>
         /// <typeparam name="T">实例类型</typeparam>
         /// <param name="name">服务名称</param>
-        /// <returns></returns>
-        public static T Create<T>(string name = null)
-        {
-            return DefaultContainer.Create<T>(name);
+        public static T Create<T>( string name = null ) {
+            return DefaultContainer.Create<T>( name );
         }
 
         /// <summary>
@@ -68,18 +58,14 @@ namespace TonyUtil.Helpers
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        /// <returns></returns>
-        public static TResult Create<TResult>(Type type, string name = null)
-        {
-            return (TResult) DefaultContainer.Create(type, name);
+        public static TResult Create<TResult>( Type type, string name = null ) {
+            return (TResult)DefaultContainer.Create( type, name );
         }
 
         /// <summary>
         /// 作用域开始
         /// </summary>
-        /// <returns></returns>
-        public static IScope BeginScope()
-        {
+        public static IScope BeginScope() {
             return DefaultContainer.BeginScope();
         }
 
@@ -87,9 +73,8 @@ namespace TonyUtil.Helpers
         /// 注册依赖
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        public static void Register(params IConfig[] configs)
-        {
-            DefaultContainer.Register(null, builder => builder.EnableAop(), configs);
+        public static void Register( params IConfig[] configs ) {
+            DefaultContainer.Register( null, builder=> builder.EnableAop(), configs );
         }
 
         /// <summary>
@@ -97,18 +82,15 @@ namespace TonyUtil.Helpers
         /// </summary>
         /// <param name="services">服务集合</param>
         /// <param name="configs">依赖配置</param>
-        public static void Register(IServiceCollection services, params IConfig[] configs)
-        {
-            DefaultContainer.Register(services, builder => builder.EnableAop(), configs);
+        public static IServiceProvider Register( IServiceCollection services, params IConfig[] configs ) {
+            return DefaultContainer.Register( services, builder => builder.EnableAop(), configs );
         }
 
         /// <summary>
         /// 释放容器
         /// </summary>
-        public static void Dispose()
-        {
+        public static void Dispose() {
             DefaultContainer.Dispose();
         }
-
     }
 }

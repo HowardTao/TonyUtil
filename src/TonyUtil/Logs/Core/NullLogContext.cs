@@ -1,13 +1,11 @@
 ﻿using System.Diagnostics;
 using TonyUtil.Logs.Abstractions;
 
-namespace TonyUtil.Logs.Core
-{
+namespace TonyUtil.Logs.Core {
     /// <summary>
     /// 空日志上下文
     /// </summary>
-    public class NullLogContext : ILogContext
-    {
+    public class NullLogContext : ILogContext {
         /// <summary>
         /// 空日志上下文实例
         /// </summary>

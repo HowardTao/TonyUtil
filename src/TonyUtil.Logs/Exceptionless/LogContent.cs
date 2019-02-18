@@ -1,20 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace TonyUtil.Logs.Exceptionless
-{
+namespace TonyUtil.Logs.Exceptionless {
     /// <summary>
     /// Exceptionless日志内容
     /// </summary>
-    public class LogContent:Contents.LogContent,ILogConvert
-    {
+    public class LogContent : Contents.LogContent, ILogConvert {
         /// <summary>
         /// 转换
         /// </summary>
-        /// <returns></returns>
-        public List<Item> To()
-        {
-            return new List<Item>()
-            {
+        public List<Item> To() {
+            return new List<Item> {
                 { new Item( LogResource.LogName, LogName,1) },
                 { new Item(LogResource.TraceId, TraceId,2) },
                 { new Item(LogResource.OperationTime, OperationTime,3) },

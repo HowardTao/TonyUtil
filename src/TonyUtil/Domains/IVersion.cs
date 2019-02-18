@@ -1,10 +1,8 @@
-﻿namespace TonyUtil.Domains
-{
+﻿namespace TonyUtil.Domains {
     /// <summary>
     /// 乐观锁
     /// </summary>
-   public interface IVersion
-    {
+    public interface IVersion {
         /// <summary>
         /// 版本号
         /// </summary>

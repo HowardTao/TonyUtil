@@ -1,7 +1,8 @@
-﻿namespace TonyUtil.Applications.Trees
-{
-    public enum LoadMode
-    {
+﻿namespace TonyUtil.Applications.Trees {
+    /// <summary>
+    /// 加载模式
+    /// </summary>
+    public enum LoadMode {
         /// <summary>
         /// 同步
         /// </summary>

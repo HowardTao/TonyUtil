@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TonyUtil.Helpers
-{
+﻿namespace TonyUtil.Helpers {
     /// <summary>
     /// 常量
     /// </summary>
-    public static class Const
-    {
+    public static class Const {
         /// <summary>
         /// 汉字及拼音首字母
         /// </summary>

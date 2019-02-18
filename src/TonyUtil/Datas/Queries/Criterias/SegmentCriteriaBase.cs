@@ -3,8 +3,7 @@ using System.Linq.Expressions;
 using TonyUtil.Domains.Repositories;
 using TonyUtil.Expressions;
 
-namespace TonyUtil.Datas.Queries.Criterias
-{
+namespace TonyUtil.Datas.Queries.Criterias {
     /// <summary>
     /// 范围过滤条件
     /// </summary>
@@ -13,8 +12,7 @@ namespace TonyUtil.Datas.Queries.Criterias
     /// <typeparam name="TValue">值类型</typeparam>
     public abstract class SegmentCriteriaBase<TEntity, TProperty, TValue> : ICriteria<TEntity>
         where TEntity : class
-        where TValue : struct
-    {
+        where TValue : struct {
         /// <summary>
         /// 属性表达式
         /// </summary>
@@ -43,8 +41,7 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
-        protected SegmentCriteriaBase(Expression<Func<TEntity, TProperty>> propertyExpression, TValue? min, TValue? max, Boundary boundary)
-        {
+        protected SegmentCriteriaBase( Expression<Func<TEntity, TProperty>> propertyExpression, TValue? min, TValue? max, Boundary boundary ) {
             _builder = new PredicateExpressionBuilder<TEntity>();
             _propertyExpression = propertyExpression;
             _min = min;
@@ -55,9 +52,8 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// <summary>
         /// 获取查询条件
         /// </summary>
-        public Expression<Func<TEntity, bool>> GetPredicate()
-        {
-            Adjust(_min, _max);
+        public Expression<Func<TEntity, bool>> GetPredicate() {
+            Adjust( _min, _max );
             CreateLeftExpression();
             CreateRightExpression();
             return _builder.ToLambda();
@@ -66,9 +62,8 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// <summary>
         /// 当最小值大于最大值时进行校正
         /// </summary>
-        private void Adjust(TValue? min, TValue? max)
-        {
-            if (IsMinGreaterMax(min, max) == false)
+        private void Adjust( TValue? min, TValue? max ) {
+            if( IsMinGreaterMax( min, max ) == false )
                 return;
             _min = max;
             _max = min;
@@ -79,25 +74,22 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// </summary>
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
-        protected abstract bool IsMinGreaterMax(TValue? min, TValue? max);
+        protected abstract bool IsMinGreaterMax( TValue? min, TValue? max );
 
         /// <summary>
         /// 创建左操作数，即 t => t.Property >= Min
         /// </summary>
-        private void CreateLeftExpression()
-        {
-            if (_min == null)
+        private void CreateLeftExpression() {
+            if( _min == null )
                 return;
-            _builder.Append(_propertyExpression, CreateLeftOperator(_boundary), GetMinValue());
+            _builder.Append( _propertyExpression, CreateLeftOperator( _boundary ), GetMinValue() );
         }
 
         /// <summary>
         /// 创建左操作符
         /// </summary>
-        protected virtual Operator CreateLeftOperator(Boundary? boundary)
-        {
-            switch (boundary)
-            {
+        protected virtual Operator CreateLeftOperator( Boundary? boundary ) {
+            switch( boundary ) {
                 case Boundary.Left:
                     return Operator.GreaterEqual;
                 case Boundary.Both:
@@ -110,28 +102,24 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// <summary>
         /// 获取最小值
         /// </summary>
-        protected virtual TValue? GetMinValue()
-        {
+        protected virtual TValue? GetMinValue() {
             return _min;
         }
 
         /// <summary>
         /// 创建右操作数，即 t => t.Property &lt;= Max
         /// </summary>
-        private void CreateRightExpression()
-        {
-            if (_max == null)
+        private void CreateRightExpression() {
+            if( _max == null )
                 return;
-            _builder.Append(_propertyExpression, CreateRightOperator(_boundary), GetMaxValue());
+            _builder.Append( _propertyExpression, CreateRightOperator( _boundary ), GetMaxValue() );
         }
 
         /// <summary>
         /// 创建右操作符
         /// </summary>
-        protected virtual Operator CreateRightOperator(Boundary? boundary)
-        {
-            switch (boundary)
-            {
+        protected virtual Operator CreateRightOperator( Boundary? boundary ) {
+            switch( boundary ) {
                 case Boundary.Right:
                     return Operator.LessEqual;
                 case Boundary.Both:
@@ -144,8 +132,7 @@ namespace TonyUtil.Datas.Queries.Criterias
         /// <summary>
         /// 获取最大值
         /// </summary>
-        protected virtual TValue? GetMaxValue()
-        {
+        protected virtual TValue? GetMaxValue() {
             return _max;
         }
     }

@@ -9,13 +9,11 @@ using TonyUtil.Events.Handlers;
 using TonyUtil.Helpers;
 using TonyUtil.Reflections;
 
-namespace TonyUtil.Dependency
-{
+namespace TonyUtil.Dependency {
     /// <summary>
     /// 依赖配置
     /// </summary>
-   public class DependencyConfiguration
-    {
+    public class DependencyConfiguration {
         /// <summary>
         /// 服务集合
         /// </summary>
@@ -42,19 +40,22 @@ namespace TonyUtil.Dependency
         /// </summary>
         /// <param name="services">服务集合</param>
         /// <param name="configs">依赖配置</param>
-        public DependencyConfiguration(IServiceCollection services, IConfig[] configs)
-        {
+        public DependencyConfiguration( IServiceCollection services, IConfig[] configs ) {
             _services = services;
             _configs = configs;
         }
 
-        public IServiceProvider Config()
-        {
-            return Ioc.DefaultContainer.Register(_services, RegistServices, _configs);
+        /// <summary>
+        /// 配置依赖
+        /// </summary>
+        public IServiceProvider Config() {
+            return Ioc.DefaultContainer.Register( _services, RegistServices, _configs );
         }
 
-        private void RegistServices(ContainerBuilder builder)
-        {
+        /// <summary>
+        /// 注册服务集合
+        /// </summary>
+        private void RegistServices( ContainerBuilder builder ) {
             _builder = builder;
             _finder = new WebFinder();
             _assemblies = _finder.GetAssemblies();
@@ -64,18 +65,9 @@ namespace TonyUtil.Dependency
         }
 
         /// <summary>
-        /// 注册上下文
-        /// </summary>
-        private void RegistContext()
-        {
-            _builder.AddSingleton<IContext, WebContext>();
-        }
-
-        /// <summary>
         /// 注册基础设施
         /// </summary>
-        private void RegistInfrastracture()
-        {
+        private void RegistInfrastracture() {
             EnableAop();
             RegistFinder();
             RegistContext();
@@ -84,39 +76,48 @@ namespace TonyUtil.Dependency
         /// <summary>
         /// 启用Aop
         /// </summary>
-        private void EnableAop()
-        {
+        private void EnableAop() {
             _builder.EnableAop();
         }
 
         /// <summary>
         /// 注册类型查找器
         /// </summary>
-        private void RegistFinder()
-        {
-            _builder.AddSingleton(_finder);
+        private void RegistFinder() {
+            _builder.AddSingleton( _finder );
+        }
+
+        /// <summary>
+        /// 注册上下文
+        /// </summary>
+        private void RegistContext() {
+            _builder.AddSingleton<IContext, WebContext>();
         }
 
         /// <summary>
         /// 注册事件处理器
         /// </summary>
-        private void RegistEventHandlers()
-        {
-            var handlerTypes = GetTypes(typeof(IEventHandler<>));
-            foreach (var handler in handlerTypes)
-            {
-                _builder.RegisterType(handler).As(handler.FindInterfaces(
-                    (filter, criteria) => filter.IsGenericType && ((Type)criteria).IsAssignableFrom(filter.GetGenericTypeDefinition())
-                    , typeof(IEventHandler<>)
-                )).InstancePerLifetimeScope();
+        private void RegistEventHandlers() {
+            RegistEventHandlers( typeof( IEventHandler<> ) );
+        }
+
+        /// <summary>
+        /// 注册事件处理器
+        /// </summary>
+        private void RegistEventHandlers(Type handlerType ) {
+            var handlerTypes = GetTypes( handlerType );
+            foreach( var handler in handlerTypes ) {
+                _builder.RegisterType( handler ).As( handler.FindInterfaces(
+                    ( filter, criteria ) => filter.IsGenericType && ( (Type)criteria ).IsAssignableFrom( filter.GetGenericTypeDefinition() )
+                    , handlerType
+                ) ).InstancePerLifetimeScope();
             }
         }
 
         /// <summary>
         /// 查找并注册依赖
         /// </summary>
-        private void RegistDependency()
-        {
+        private void RegistDependency() {
             RegistSingletonDependency();
             RegistScopeDependency();
             RegistTransientDependency();
@@ -126,55 +127,44 @@ namespace TonyUtil.Dependency
         /// <summary>
         /// 注册单例依赖
         /// </summary>
-        private void RegistSingletonDependency()
-        {
-            _builder.RegisterTypes(GetTypes<ISingletonDependency>()).AsImplementedInterfaces().PropertiesAutowired().SingleInstance();
+        private void RegistSingletonDependency() {
+            _builder.RegisterTypes( GetTypes<ISingletonDependency>() ).AsImplementedInterfaces().PropertiesAutowired().SingleInstance();
         }
 
         /// <summary>
         /// 注册作用域依赖
         /// </summary>
-        private void RegistScopeDependency()
-        {
-            _builder.RegisterTypes(GetTypes<IScopeDependency>()).AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
+        private void RegistScopeDependency() {
+            _builder.RegisterTypes( GetTypes<IScopeDependency>() ).AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
         }
 
         /// <summary>
         /// 注册瞬态依赖
         /// </summary>
-        private void RegistTransientDependency()
-        {
-            _builder.RegisterTypes(GetTypes<ITransientDependency>()).AsImplementedInterfaces().PropertiesAutowired().InstancePerDependency();
+        private void RegistTransientDependency() {
+            _builder.RegisterTypes( GetTypes<ITransientDependency>() ).AsImplementedInterfaces().PropertiesAutowired().InstancePerDependency();
         }
 
         /// <summary>
         /// 解析依赖注册器
         /// </summary>
-        private void ResolveDependencyRegistrar()
-        {
+        private void ResolveDependencyRegistrar() {
             var types = GetTypes<IDependencyRegistrar>();
-            types.Select(type => Reflection.CreateInstance<IDependencyRegistrar>(type)).ToList()
-                .ForEach(t => t.Regist(_services));
+            types.Select( type => Reflection.CreateInstance<IDependencyRegistrar>( type ) ).ToList().ForEach( t => t.Regist( _services ) );
         }
 
         /// <summary>
         /// 获取类型集合
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        private Type[] GetTypes<T>()
-        {
-            return _finder.Find<T>(_assemblies).ToArray();
+        private Type[] GetTypes<T>() {
+            return _finder.Find<T>( _assemblies ).ToArray();
         }
 
         /// <summary>
         /// 获取类型集合
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private Type[] GetTypes(Type type)
-        {
-            return _finder.Find(type, _assemblies).ToArray();
+        private Type[] GetTypes( Type type ) {
+            return _finder.Find( type, _assemblies ).ToArray();
         }
     }
 }
